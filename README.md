@@ -1,99 +1,11 @@
-# Onion Monero Blockchain Explorer
 
-Currently available Monero blockchain explorers have several limitations which are of 
-special importance to privacy-oriented users:
-
- - they use JavaScript,
- - have images which might be used for [cookieless tracking](http://lucb1e.com/rp/cookielesscookies/),
- - track users activates through google analytics,
- - are closed sourced,
- - are not available as hidden services,
- - do not support Monero testnet,
- - have limited JSON API.
-
-
-In this example, these limitations are addressed by development of
-an Onion Monero Blockchain Explorer. The example not only shows how to use 
-Monero C++ libraries, but also demonstrates how to use:
-
- - [crow](https://github.com/ipkn/crow) - C++ micro web framework 
- - [mstch](https://github.com/no1msd/mstch) - C++ {{mustache}} templates
- - [json](https://github.com/nlohmann/json) - JSON for Modern C++
- - [fmt](https://github.com/fmtlib/fmt) - Small, safe and fast string formatting library
-
-## Addresses
-
-Tor users:
- 
- - [http://dvwae436pd7nt4bc.onion](http://dvwae436pd7nt4bc.onion) (Front-end templates are [maintained by @suhz](https://github.com/suhz/onion-monero-blockchain-explorer/tree/moneroexplorer.com/src/templates)).
-  
-Clearnet versions:
-
- - [https://oculus.serveo.net/](https://oculus.serveo.net/) - bleeding edge version. 
- - [https://xmrchain.net/](https://xmrchain.net/) - https enabled, most popular and very stable.
- - [https://MoneroExplorer.com/](https://moneroexplorer.com/) - nice looking one, https enabled.
- - [https://monerohash.com/explorer/](https://monerohash.com/explorer/) - nice looking one, https enabled.
- - [http://explore.MoneroWorld.com](http://explore.moneroworld.com) - same as the second one. 
- - [https://moneroexplorer.pro/](https://moneroexplorer.pro/) - nice looking one, https enabled.
- - [https://explorer.monero-otc.com/](https://explorer.monero-otc.com/) - https enabled.
- - [http://monerochain.com/](http://monerochain.com/) - JSON API based, multiple nodes.   
- - [http://atesti.mooo.com:8081/](http://atesti.mooo.com:8081/) - Proof of Existence built with Monero and IPFS. 
--  [https://anunknownamount.com](https://anunknownamount.com/) - looks nice, https enabled.
-  
-Clearnet testnet Monero version:
-
- - [https://retineo.serveo.net](https://retineo.serveo.net) - bleeding edge version (v8). 
- - [https://testnet.xmrchain.com/](https://testnet.xmrchain.com/) - https enabled.
- - [https://explorer.monero-otc.com/](https://explorer.monero-otc.com/) - https enabled.
- - [https://testnet.MoneroExplorer.com/](https://testnet.moneroexplorer.com/) - https enabled.
-
-i2p users (main Monero network):
-
- - [http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/](http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/)
-
-Alternative block explorers:
-
-- [http://moneroblocks.info](http://moneroblocks.info/)
-- [https://monerobase.com](https://monerobase.com/)
-- [http://chainradar.com](http://chainradar.com/xmr/blocks)
-
- 
-## Onion Monero Blockchain Explorer features
-
-The key features of the Onion Monero Blockchain Explorer are:
-
- - no javascript, no cookies, no web analytics trackers, no images,
- - open sourced,
- - made fully in C++,
- - showing encrypted payments ID,
- - showing ring signatures,
- - showing transaction extra field,
- - showing public components of Monero addresses,
- - decoding which outputs and mixins belong to the given Monero address and viewkey,
- - can prove that you send Monero to someone,
- - detailed information about mixins, such as, mixins'
- age, timescale, mixin of mixins,
- - showing number of amount output indices,
- - support Monero testnet network,
- - tx checker and pusher for online pushing of transactions,
- - estimate possible spendings based on address and viewkey,
- - can provide total amount of all miner fees.
- - decoding encrypted payment id.
-
-
-## Development branch
-
-Current development branch, which includes support for sub-addresses is:
-
- - https://github.com/moneroexamples/onion-monero-blockchain-explorer/tree/devel
- 
- 
+# Onion Blockchain Explorer
 
 ## Compilation on Ubuntu 16.04
 
 ##### Compile latest Monero release v0.11
 
-Download and compile recent Monero into your home folder:
+Download and compile recent Shang into your home folder:
 
 ```bash
 # first install monero dependecines
@@ -104,12 +16,9 @@ sudo apt install git build-essential cmake libboost-all-dev miniupnpc libunbound
 # go to home folder 
 cd ~
 
-git clone https://github.com/monero-project/monero
+git clone https://github.com/shangproject/shangcoin
 
-cd monero/
-
-# checkout last monero version
-git checkout -b last_release v0.11.1.0
+cd shangcoin/
 
 make
 ```
@@ -120,24 +29,20 @@ Once the Monero is compiles, the explorer can be downloaded and compiled
 as follows:
 
 ```bash
-# go to home folder if still in ~/monero
+# go to home folder if still in ~/shangcoin
 cd ~
 
 # download the source code
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+git clone https://github.com/shangproject/shang-blockchain-explorer.git
 
 # enter the downloaded sourced code folder
-cd onion-monero-blockchain-explorer
+cd shang-blockchain-explorer
 
 # make a build folder and enter it
 mkdir build && cd build
 
 # create the makefile
 cmake ..
-
-# altearnatively can use: cmake -DMONERO_DIR=/path/to/monero_folder .. 
-# if monero is not in ~/monero
-
 # compile
 make
 ```
@@ -152,14 +57,13 @@ To run it:
 ./xmrblocks
 ```
 
-By default it will look for blockchain in its default location i.e., `~/.bitmonero/lmdb`.
+By default it will look for blockchain in its default location i.e., `~/.shangcoin/lmdb`.
 You can use `--bc-path` option if its in different location. 
 Example output:
 
 ```bash
-[mwo@arch onion-monero-blockchain-explorer]$ ./xmrblocks
-2016-May-28 10:04:49.160280 Blockchain initialized. last block: 1056761, d0.h0.m12.s47 time ago, current difficulty: 1517857750
-(2016-05-28 02:04:49) [INFO    ] Crow/0.1 server is running, local port 8081
+./xmrblocks
+[INFO    ] Crow/0.1 server is running, local port 8081
 ```
 
 Go to your browser: http://127.0.0.1:8081
@@ -204,12 +108,12 @@ xmrblocks, Onion Monero Blockchain Explorer:
   --mempool-refresh-time arg (=5)       time, in seconds, for each refresh of 
                                         mempool state
   -b [ --bc-path ] arg                  path to lmdb folder of the blockchain, 
-                                        e.g., ~/.bitmonero/lmdb
+                                        e.g., ~/.shangcoin/lmdb
   --ssl-crt-file arg                    path to crt file for ssl (https) 
                                         functionality
   --ssl-key-file arg                    path to key file for ssl (https) 
                                         functionality
-  -d [ --deamon-url ] arg (=http:://127.0.0.1:18081)
+  -d [ --deamon-url ] arg (=http:://127.0.0.1:12049)
                                         Monero deamon url
 ```
 
@@ -788,4 +692,97 @@ finished and may not work as intended.
 ## How can you help?
 
 Constructive criticism, code and website edits are always good. They can be made through github.
+
+
+
+
+# Onion Monero Blockchain Explorer
+
+Currently available Monero blockchain explorers have several limitations which are of
+special importance to privacy-oriented users:
+
+- they use JavaScript,
+- have images which might be used for [cookieless tracking](http://lucb1e.com/rp/cookielesscookies/),
+- track users activates through google analytics,
+- are closed sourced,
+- are not available as hidden services,
+- do not support Monero testnet,
+- have limited JSON API.
+
+
+In this example, these limitations are addressed by development of
+an Onion Monero Blockchain Explorer. The example not only shows how to use
+Monero C++ libraries, but also demonstrates how to use:
+
+- [crow](https://github.com/ipkn/crow) - C++ micro web framework
+- [mstch](https://github.com/no1msd/mstch) - C++ {{mustache}} templates
+- [json](https://github.com/nlohmann/json) - JSON for Modern C++
+- [fmt](https://github.com/fmtlib/fmt) - Small, safe and fast string formatting library
+
+## Addresses
+
+Tor users:
+
+- [http://dvwae436pd7nt4bc.onion](http://dvwae436pd7nt4bc.onion) (Front-end templates are [maintained by @suhz](https://github.com/suhz/onion-monero-blockchain-explorer/tree/moneroexplorer.com/src/templates)).
+
+Clearnet versions:
+
+- [https://oculus.serveo.net/](https://oculus.serveo.net/) - bleeding edge version.
+- [https://xmrchain.net/](https://xmrchain.net/) - https enabled, most popular and very stable.
+- [https://MoneroExplorer.com/](https://moneroexplorer.com/) - nice looking one, https enabled.
+- [https://monerohash.com/explorer/](https://monerohash.com/explorer/) - nice looking one, https enabled.
+- [http://explore.MoneroWorld.com](http://explore.moneroworld.com) - same as the second one.
+- [https://moneroexplorer.pro/](https://moneroexplorer.pro/) - nice looking one, https enabled.
+- [https://explorer.monero-otc.com/](https://explorer.monero-otc.com/) - https enabled.
+- [http://monerochain.com/](http://monerochain.com/) - JSON API based, multiple nodes.
+- [http://atesti.mooo.com:8081/](http://atesti.mooo.com:8081/) - Proof of Existence built with Monero and IPFS.
+-  [https://anunknownamount.com](https://anunknownamount.com/) - looks nice, https enabled.
+
+Clearnet testnet Monero version:
+
+- [https://retineo.serveo.net](https://retineo.serveo.net) - bleeding edge version (v8).
+- [https://testnet.xmrchain.com/](https://testnet.xmrchain.com/) - https enabled.
+- [https://explorer.monero-otc.com/](https://explorer.monero-otc.com/) - https enabled.
+- [https://testnet.MoneroExplorer.com/](https://testnet.moneroexplorer.com/) - https enabled.
+
+i2p users (main Monero network):
+
+- [http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/](http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/)
+
+Alternative block explorers:
+
+- [http://moneroblocks.info](http://moneroblocks.info/)
+- [https://monerobase.com](https://monerobase.com/)
+- [http://chainradar.com](http://chainradar.com/xmr/blocks)
+
+
+## Onion Monero Blockchain Explorer features
+
+The key features of the Onion Monero Blockchain Explorer are:
+
+- no javascript, no cookies, no web analytics trackers, no images,
+- open sourced,
+- made fully in C++,
+- showing encrypted payments ID,
+- showing ring signatures,
+- showing transaction extra field,
+- showing public components of Monero addresses,
+- decoding which outputs and mixins belong to the given Monero address and viewkey,
+- can prove that you send Monero to someone,
+- detailed information about mixins, such as, mixins'
+age, timescale, mixin of mixins,
+- showing number of amount output indices,
+- support Monero testnet network,
+- tx checker and pusher for online pushing of transactions,
+- estimate possible spendings based on address and viewkey,
+- can provide total amount of all miner fees.
+- decoding encrypted payment id.
+
+
+## Development branch
+
+Current development branch, which includes support for sub-addresses is:
+
+- https://github.com/moneroexamples/onion-monero-blockchain-explorer/tree/devel
+
 

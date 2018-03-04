@@ -283,8 +283,9 @@ MempoolStatus::is_thread_running()
     return is_running;
 }
 
-bf::path MempoolStatus::blockchain_path {"/home/mwo/.bitmonero/lmdb"};
-string MempoolStatus::deamon_url {"http:://127.0.0.1:18081"};
+    // EDITING LMDB
+bf::path MempoolStatus::blockchain_path {"~/.shangcoin/lmdb"};
+string MempoolStatus::deamon_url {"http:://127.0.0.1:12049"};
 bool   MempoolStatus::testnet {false};
 atomic<bool>       MempoolStatus::is_running {false};
 boost::thread      MempoolStatus::m_thread;

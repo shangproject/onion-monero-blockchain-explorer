@@ -297,13 +297,14 @@ CurrentBlockchainStatus::is_thread_running()
    return is_running;
 }
 
-bf::path CurrentBlockchainStatus::blockchain_path {"/home/mwo/.bitmonero/lmdb"};
+    // EDITING: LMDB PATH
+bf::path CurrentBlockchainStatus::blockchain_path {"~/.shangcoin/lmdb"};
 
 bool   CurrentBlockchainStatus::testnet {false};
 
 string CurrentBlockchainStatus::output_file {"emission_amount.txt"};
 
-string CurrentBlockchainStatus::deamon_url {"http:://127.0.0.1:18081"};
+string CurrentBlockchainStatus::deamon_url {"http:://127.0.0.1:12049"};
 
 uint64_t  CurrentBlockchainStatus::blockchain_chunk_size {10000};
 

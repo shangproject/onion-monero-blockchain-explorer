@@ -149,9 +149,9 @@ main(int ac, const char* av[])
 
     string deamon_url {*deamon_url_opt};
 
-    if (testnet && deamon_url == "http:://127.0.0.1:18081")
+    if (testnet && deamon_url == "http:://127.0.0.1:12049")
     {
-        deamon_url = "http:://127.0.0.1:28081";
+        deamon_url = "http:://127.0.0.1:22049";
     }
 
     uint64_t mempool_info_timeout {5000};
@@ -179,7 +179,7 @@ main(int ac, const char* av[])
         // This thread stores the current emission
         // which it has caluclated in
         // <blockchain_path>/emission_amount.txt file,
-        // e.g., ~/.bitmonero/lmdb/emission_amount.txt.
+        // e.g., ~/.shangcoin/lmdb/emission_amount.txt.
         // So instead of calcualting the emission
         // from scrach whenever the explorer is started,
         // the thread is initalized with the values
